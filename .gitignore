@@ -1,6 +1,12 @@
 .env
+.env.*
+!.env.example
 .venv/
 venv/
 __pycache__/
 *.py[cod]
 .playwright-mcp/
+*.pem
+*.key
+credentials.json
+/secrets/

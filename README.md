@@ -82,10 +82,17 @@ Yayınlanacak klasör yalnızca `site/` olmalıdır. Bu klasörde `.env` veya AP
 
 ### GitHub Pages
 
-1. Projeyi GitHub deposuna yükleyin; `.env` dosyasını kesinlikle eklemeyin.
-2. Depo **Settings → Pages → Build and deployment → Source** bölümünde **GitHub Actions** seçin.
-3. Depodaki `.github/workflows/pages.yml`, her `main` dalı güncellemesinde `site/` klasörünü GitHub Pages'e yayınlar. `main` farklıysa workflow dosyasındaki dal adını değiştirin.
-4. İlk GitHub Actions dağıtımı tamamlandığında Pages ekranında gösterilen ücretsiz `github.io` adresini açın.
+1. Site dosyalarını GitHub Pages'in okuyacağı `docs/` klasörüne kopyalayın:
+
+   ```powershell
+   python pipeline\04_sync_docs.py
+   ```
+
+2. Deponun **Settings → Pages → Build and deployment → Source** bölümünde **Deploy from a branch** seçin.
+3. Branch olarak `main`, klasör olarak `/docs` seçip **Save** düğmesine basın.
+4. Yayınlandıktan sonra Pages ekranında gösterilen `github.io` adresini açın.
+
+`pipeline\03_build.py` ile katalog yeniden üretildikten sonra `pipeline\04_sync_docs.py` komutunu da çalıştırıp `docs/` değişikliklerini commit edin. `.env` ve anahtar dosyaları Git'e eklemeyin.
 
 ## 5. Yeni video ekleme
 
@@ -95,6 +102,7 @@ Yeni bir kanal eklediyseniz `channels.json` dosyasını güncelleyin. Ardından 
 python pipeline\01_fetch.py
 python pipeline\02_clean.py
 python pipeline\03_build.py
+python pipeline\04_sync_docs.py
 ```
 
-Yeni videolar ham kataloğa eklenir ve site kataloğu yeniden oluşturulur. `site/` klasörünü GitHub'a yükleyince bağlı Pages/Cloudflare yayını güncellenir.
+Yeni videolar ham kataloğa eklenir, site kataloğu yeniden oluşturulur ve Pages için `docs/` kopyası güncellenir. Bu değişiklikleri GitHub'a yükleyince bağlı yayın güncellenir.
