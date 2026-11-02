@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="tr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Video — UygurTube</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/storage.js" defer></script>
+    <script src="js/watch.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header watch-header">
+      <button class="mobile-menu" id="mobile-menu" type="button" aria-label="Gezinmeyi göster" aria-controls="watch-sidebar" aria-expanded="false">☰</button>
+      <a class="brand" href="index.html" aria-label="UygurTube ana sayfa">
+        <span class="brand-mark" aria-hidden="true">U</span>
+        <span>UygurTube</span>
+      </a>
+      <form class="search-wrap" action="index.html">
+        <label class="visually-hidden" for="watch-search">Videolarda ara</label>
+        <input id="watch-search" name="q" type="search" dir="auto" placeholder="Video veya kanal ara…" autocomplete="off">
+      </form>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Temayı değiştir">☼</button>
+    </header>
+
+    <div class="app-layout watch-app-layout">
+      <aside class="sidebar watch-sidebar" id="watch-sidebar" aria-label="Ana gezinme">
+        <nav class="side-nav">
+          <a class="nav-item" href="index.html"><span class="nav-icon" aria-hidden="true">⌂</span><span>Ana sayfa</span></a>
+          <a class="nav-item" href="index.html?view=longs"><span class="nav-icon" aria-hidden="true">▶</span><span>Uzun videolar</span></a>
+          <a class="nav-item" href="index.html?view=categories"><span class="nav-icon" aria-hidden="true">▦</span><span>Kategoriler</span></a>
+          <div class="nav-divider"></div>
+          <p class="nav-heading">KÜTÜPHANEM</p>
+          <a class="nav-item" href="index.html?view=liked"><span class="nav-icon" aria-hidden="true">♡</span><span>Beğenilenler</span></a>
+          <a class="nav-item" href="index.html?view=later"><span class="nav-icon" aria-hidden="true">▣</span><span>Sonra izle</span></a>
+          <a class="nav-item" href="index.html?view=history"><span class="nav-icon" aria-hidden="true">◷</span><span>Geçmiş</span></a>
+          <div class="nav-divider"></div>
+          <a class="nav-item" href="index.html?view=settings"><span class="nav-icon" aria-hidden="true">⚙</span><span>Ayarlar</span></a>
+        </nav>
+        <p class="sidebar-note">Kişisel listeleriniz bu tarayıcıda saklanır.</p>
+      </aside>
+
+      <main class="watch-layout">
+        <section class="watch-main">
+          <div class="player-frame" id="player"></div>
+          <p class="load-error" id="load-error" role="alert" hidden></p>
+          <div class="watch-details">
+            <p class="eyebrow" id="watch-category"></p>
+            <h1 id="watch-title" dir="auto">Video yükleniyor…</h1>
+            <p class="watch-channel" id="watch-channel" dir="auto"></p>
+            <p class="watch-meta" id="watch-meta"></p>
+            <div class="watch-actions">
+              <button class="secondary-button" id="like-video" type="button" aria-pressed="false">♡ Beğen</button>
+              <button class="secondary-button" id="save-video" type="button" aria-pressed="false">＋ Sonra izle</button>
+            </div>
+          </div>
+        </section>
+        <aside class="related-section">
+          <h2>Benzer videolar</h2>
+          <div class="related-list" id="related-list"></div>
+        </aside>
+      </main>
+    </div>
+    <footer class="site-footer">
+      <span>UygurTube</span>
+      <span>Videolar YouTube üzerinden oynatılır.</span>
+    </footer>
+  </body>
+</html>

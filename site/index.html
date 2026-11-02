@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="tr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Uygurca videoları keşfedin.">
+    <title>UygurTube — Uygurca videolar</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/storage.js" defer></script>
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <button class="mobile-menu" id="mobile-menu" type="button" aria-label="Menüyü aç" aria-controls="sidebar" aria-expanded="false">☰</button>
+      <a class="brand" href="index.html" aria-label="UygurTube ana sayfa">
+        <span class="brand-mark" aria-hidden="true">U</span>
+        <span>UygurTube</span>
+      </a>
+      <form class="search-wrap" action="index.html">
+        <label class="visually-hidden" for="search">Videolarda ara</label>
+        <input id="search" name="q" type="search" dir="auto" placeholder="Video veya kanal ara…" autocomplete="off">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+      </form>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Temayı değiştir">☼</button>
+    </header>
+
+    <button class="drawer-backdrop" id="drawer-backdrop" type="button" aria-label="Menüyü kapat" hidden></button>
+    <aside class="sidebar" id="sidebar" aria-label="Ana gezinme" aria-hidden="true">
+      <div class="drawer-header">
+        <span>Menü</span>
+        <button class="drawer-close" id="drawer-close" type="button" aria-label="Menüyü kapat">×</button>
+      </div>
+      <nav class="side-nav" id="primary-nav">
+        <button class="nav-item is-active" type="button" data-view="home" aria-current="page"><span class="nav-icon" aria-hidden="true">⌂</span><span>Ana sayfa</span></button>
+        <button class="nav-item" type="button" data-view="longs"><span class="nav-icon" aria-hidden="true">▶</span><span>Uzun videolar</span><span class="nav-hint">20 dk+</span></button>
+        <div class="nav-divider"></div>
+        <p class="nav-heading">KÜTÜPHANEM</p>
+        <button class="nav-item" type="button" data-view="liked"><span class="nav-icon" aria-hidden="true">♡</span><span>Beğenilenler</span><span class="nav-count" id="liked-count">0</span></button>
+        <button class="nav-item" type="button" data-view="history"><span class="nav-icon" aria-hidden="true">◷</span><span>Geçmiş</span><span class="nav-count" id="history-count">0</span></button>
+        <button class="nav-item" type="button" data-view="later"><span class="nav-icon" aria-hidden="true">◷</span><span>Sonra izle</span><span class="nav-count" id="later-count">0</span></button>
+        <div class="nav-divider"></div>
+        <button class="nav-item" id="category-nav-toggle" type="button" aria-controls="sidebar-categories" aria-expanded="false">
+          <span class="nav-icon" aria-hidden="true">▦</span><span>Kategoriler</span><span class="nav-chevron" aria-hidden="true">⌄</span>
+        </button>
+        <div class="sidebar-categories" id="sidebar-categories" hidden></div>
+        <div class="nav-divider"></div>
+        <button class="nav-item settings-link" type="button" data-view="settings"><span class="nav-icon" aria-hidden="true">⚙</span><span>Ayarlar</span></button>
+      </nav>
+      <p class="sidebar-note">Kişisel listeleriniz bu tarayıcıda saklanır.</p>
+    </aside>
+
+    <div class="app-layout">
+      <main class="main-content">
+        <section class="view-heading">
+          <div>
+            <p class="eyebrow">UYGURCA VİDEOLAR</p>
+            <h1 id="view-title">Keşfet</h1>
+            <p class="view-description" id="view-description">Kanallardan seçilmiş yeni videolar.</p>
+          </div>
+        </section>
+
+        <section class="toolbar" id="toolbar" aria-label="Video filtreleri">
+          <label class="filter-label">
+            <span>Kategori</span>
+            <select id="category-filter">
+              <option value="">Tüm kategoriler</option>
+            </select>
+          </label>
+          <label class="filter-label">
+            <span>Yazı türü</span>
+            <select id="script-filter">
+              <option value="">Tüm yazılar</option>
+              <option value="arab">Arap</option>
+              <option value="latin">Latin</option>
+              <option value="kiril">Kiril</option>
+              <option value="karisik">Karışık</option>
+            </select>
+          </label>
+          <label class="filter-label sort-label">
+            <span>Sırala</span>
+            <select id="sort-order">
+              <option value="newest">En yeni</option>
+              <option value="oldest">En eski</option>
+              <option value="views">En çok izlenen</option>
+            </select>
+          </label>
+        </section>
+
+        <section class="settings-panel" id="settings-panel" hidden>
+          <h2>Görünüm</h2>
+          <p>Tema tercihiniz bu tarayıcıda saklanır.</p>
+          <button class="secondary-button" id="settings-theme" type="button">Açık temaya geç</button>
+          <h2>Bu tarayıcıdaki veriler</h2>
+          <p>Beğenilenler, Sonra izle listeniz ve geçmişiniz yalnızca bu cihazda saklanır.</p>
+          <button class="secondary-button danger-button" id="clear-library" type="button">Kişisel verileri temizle</button>
+        </section>
+
+        <section class="browse-area" id="browse-area">
+          <p class="result-count" id="result-count" aria-live="polite"></p>
+          <section class="video-grid" id="video-grid" aria-label="Videolar"></section>
+          <p class="empty-state" id="empty-state" hidden>Bu ölçütlere uygun video bulunamadı.</p>
+          <p class="load-error" id="load-error" role="alert" hidden></p>
+          <button class="load-more" id="load-more" type="button" hidden>Daha fazla yükle</button>
+        </section>
+      </main>
+    </div>
+
+    <footer class="site-footer">
+      <span>UygurTube</span>
+      <span>Videolar YouTube üzerinden oynatılır.</span>
+    </footer>
+  </body>
+</html>
